@@ -40,6 +40,32 @@ public:
 			return false;
 		}
 	}
+	void method1_1(){
+		cout << "Метод method1_1 класса Base. Вызовется method 2_1: "<<endl;
+		method2_1();
+	}
+	void method1_2(){
+		cout << "Метод method1_2 класса Base. Вызовется method 2_2:" << endl;
+		method2_2();
+
+	}
+	void method2_1(){
+		cout << "Метод method2_1 класса Base" << endl;
+	}
+	virtual void method2_2(){//виртуальный метод
+		cout << "Виртуальный метод method2_2 класса Base" << endl;
+	}
+
+	void method3(){
+		cout << "Метод method3 класса Base" << endl;
+	}
+	virtual void method4(){//виртуальный метод
+		cout << "Виртуальный метод m4 класса Base" << endl;
+	}
+	virtual void redefinition(int d){//виртуальный метод переопределения переменной класса
+		a = d;
+		cout << "Виртуальный метод redefinition у Base " << endl;
+	}
 };
 class Desc : public Base
 {
@@ -68,10 +94,40 @@ public:
 		}
 		else{
 			cout << "false" << endl;
-			return Base::isa(classnm);
+			return Base::isA(classnm);
 		}
 	}
+	void method2_1(){//переопределенный метод 
+		cout << "Метод method2_1 потомка Desc" << endl;
+	}
+
+	void method2_2(){//переопределенный метод 
+		cout << "Метод method2_2 потомка Desc" << endl;
+	}
+
+	void method3(){
+		cout << "Метод method3 потомка Desc" << endl;
+	}
+	void method4(){//виртуальный в базовом
+		cout << "Метод method4 потомка Desc" << endl;
+	}
+	void redefinition(int d){
+		b = d + 1;
+		cout << "Метод redefinition у Desc " << endl;
+	}
 };
+void func1(Base obj){
+	cout << " Функция func1 obj" << endl;
+	obj.redefinition(1);//виртуальный метод Base
+}
+void func2(Base *obj){
+	cout << "Функция func2 *obj" << endl;
+	obj->redefinition(2);
+}
+void func3(Base &obj){
+	cout << "Функция func3 &obj" << endl;
+	obj.redefinition(3);
+}
 int main(){
 	
 		setlocale(LC_ALL, "RUS");
