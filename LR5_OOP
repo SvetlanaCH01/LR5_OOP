@@ -29,7 +29,7 @@ public:
 	{
 		return "Базовый виртуальный метод string classname(), Base";
 	}
-	virtual bool isa(string classnm)//Базовый виртуальный метод string classname(), Base
+	virtual bool isA(string classnm)//Базовый виртуальный метод string classname(), Base
 	{
 		if (classname() == classnm){//проверка на принадлежность
 			cout << "true" << endl;
@@ -40,8 +40,37 @@ public:
 			return false;
 		}
 	}
-
-
+};
+class Desc : public Base
+{
+public:
+	int b;
+	Desc(){
+		cout << "Вызов конструктора Desc" << endl;
+	}
+	Desc(Desc *obj){
+		cout << "Вызов конструктора преобразования *Desc" << endl;
+	}
+	Desc(Desc &obj){
+		cout << "Вызов копирующего конструктора &Desc" << endl;
+	}
+	~Desc(){
+		cout << "~Desc" << endl;
+	}
+	string classname(){
+		return "Базовый виртуальный метод string classname(), Desc";
+	}
+	bool isA(string classnm)
+	{
+		if (classname() == classnm){
+			cout << "true" << endl;
+			return true;
+		}
+		else{
+			cout << "false" << endl;
+			return Base::isa(classnm);
+		}
+	}
 };
 int main(){
 	
