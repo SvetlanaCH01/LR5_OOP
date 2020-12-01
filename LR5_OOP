@@ -128,9 +128,29 @@ void func3(Base &obj){
 	cout << "Функция func3 &obj" << endl;
 	obj.redefinition(3);
 }
+void task1() {//приведение типов
+	bool ys;
+	Desc* b1 = new Desc;
+	Base* b2 = ((Base*)(b1));//опасное приведение типов
+	ys = b2->isA("Desc");
+	if (ys == 1) {
+		cout << "Принадлежит классу Desc " << endl;
+	}
+	else cout << "Принадлежит классу Base " << endl;
+
+	Desc* b3 = new Desc;;
+	Base* b4 = dynamic_cast<Base*>(b3);//безопасное приведение типов
+	ys = b4->isA("Desc");
+	if (ys == 1) {
+		cout << "Принадлежит классу Desc " << endl;
+	}
+	else cout << "Принадлежит классу Base " << endl;
+	cout << endl;
+}
 int main(){
 	
-		setlocale(LC_ALL, "RUS");
-
-		_getch();
+	setlocale(LC_ALL, "RUS");
+	cout << "Приведение типов\n" << endl;
+	task1();// про приведение типов
+	_getch();
 	}
